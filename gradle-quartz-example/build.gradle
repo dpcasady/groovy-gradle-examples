@@ -1,0 +1,18 @@
+group 'com.cmt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy:2.4.5'
+    compile 'org.slf4j:slf4j-api:1.7.14'
+    compile 'org.slf4j:slf4j-simple:1.7.14'
+    compile 'org.quartz-scheduler:quartz:2.2.2'
+}
+
+mainClassName = "com.cmt.CronTriggerExample"
