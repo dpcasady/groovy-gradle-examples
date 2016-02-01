@@ -1,0 +1,15 @@
+group 'com.cmt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy:2.4.5"
+    compile "org.springframework:spring-context:4.2.4.RELEASE"
+
+    testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
+}

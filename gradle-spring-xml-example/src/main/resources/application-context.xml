@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Don't allow this bean to be a candidate for autowiring -->
+    <bean id="strongForce" class="com.cmt.Force" autowire-candidate="false">
+        <property name="isStrong" value="true" />
+    </bean>
+
+    <!-- Don't allow this bean to be a candidate for autowiring -->
+    <bean id="weakForce" class="com.cmt.Force" autowire-candidate="false">
+        <property name="isStrong" value="false" />
+    </bean>
+
+    <bean id="tatooine" class="com.cmt.Planet">
+        <property name="name" value="Tatooine" />
+    </bean>
+
+    <!-- Define a Person and set the force via a constructor while autowiring the home property -->
+    <bean id="jedi" class="com.cmt.Person" autowire="byType">
+        <constructor-arg type="com.cmt.Force" ref="strongForce" />
+    </bean>
+
+    <!-- Define a Person and set the force and home properties via setter injection -->
+    <bean id="stormtrooper" class="com.cmt.Person">
+        <property name="theForce" ref="weakForce" />
+        <property name="home" ref="tatooine" />
+    </bean>
+
+</beans>
