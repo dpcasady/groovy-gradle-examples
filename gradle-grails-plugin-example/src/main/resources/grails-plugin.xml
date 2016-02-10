@@ -1,0 +1,21 @@
+<plugin name='sample' version='1.0-SNAPSHOT' grailsVersion='3.0.0 &gt; *'>
+    <type>com.cmt.grails.SampleGrailsPlugin</type>
+    <!-- Optional plugin attributes
+
+    <grailsVersion></grailsVersion>
+    <loadAfter></loadAfter>
+    <authorEmail></authorEmail>
+    <license></license>
+    <author></author>
+    <organization />
+    <profiles></profiles>
+    <name></name>
+    <description></description>
+    <title></title>
+    <version />
+
+    -->
+    <resources>
+        <resource>com.cmt.Person</resource>
+    </resources>
+</plugin>
