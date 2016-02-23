@@ -1,0 +1,16 @@
+group 'com.cmt'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy:2.4.5'
+    compile 'javax.mail:mail:1.4'
+}
+
+mainClassName = "com.cmt.MailExample"
