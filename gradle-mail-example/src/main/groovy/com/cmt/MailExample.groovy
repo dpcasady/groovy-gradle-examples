@@ -5,46 +5,32 @@ import javax.mail.internet.*
 
 class MailExample {
 
+    static final String UTF8 = 'UTF-8'
+
     static void main(String... args) {
+        // TODO: Define a valid gmail account you have access to
+        String toEmail = "user@host.com"
+        String fromEmail = "user@gmail.com"
+        String password = "password"
 
-        try {
-            // TODO: Define a valid gmail account you have access to
-            final String fromEmail = "user@gmail.com"
-            final String password = "password"
-            final String toEmail = "user@host.com"
+        def sender = new MailSender(isDebug: true)
 
-            String subject = "David Copperfield"
-            String text = "Whether I shall turn out to be the hero of my own life, or whether that station will be held by anybody else, these pages must show."
+        // Send a plain text email
+        String subject = "David Copperfield"
+        String text = "Whether I shall turn out to be the hero of my own life, or whether that station will be held by anybody else, these pages must show."
 
-            // Set up properties defined by the JavaMail API to pass to the mail Session
-            // See https://javamail.java.net/nonav/docs/api/
-            def props = new Properties()
-            props.put("mail.smtp.host", "smtp.gmail.com")
-            props.put("mail.smtp.port", "587")
-            props.put("mail.smtp.auth", "true")
-            props.put("mail.smtp.starttls.enable", "true")
-            props.put("mail.smtp.debug", "true")
+        def message = new MailMessage(to: toEmail, from: fromEmail, subject: subject, text: text)
+        sender.send(message, password)
 
-            // Create Authenticator object to pass to the mail Session
-            def auth = new Authenticator() {
-                // override the getPasswordAuthentication method
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(fromEmail, password)
-                }
-            }
-            def session = Session.getInstance(props, auth)
-            session.setDebug(true)
+        // Send an email with an attachment
+        subject = "Slaughterhouse-Five"
+        text = "All this happened, more or less."
 
-            def message = new MimeMessage(session)
-            message.setFrom(new InternetAddress(fromEmail))
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail))
-            message.setSubject(subject)
-            message.setText(text)
+        def url = MailMessage.getClassLoader().getResource("Vonnegut.txt")
+        def attachment = new File(url.toURI())
 
-            Transport.send(message)
-        } catch(Exception e) {
-            println "There was a problem sending the email"
-        }
+        message = new MailMessage(to: toEmail, from: fromEmail, subject: subject, text: text, attachment: attachment)
+        sender.send(message, password)
     }
 
 }
